@@ -11,7 +11,8 @@
     {
       "name": "claude-config",
       "source": {
-        "source": "self"
+        "source": "url",
+        "url": "https://github.com/spatenotte/claude-config.git"
       },
       "description": "Personal Claude Code config: conventional-commit, skill-developer, custom statusline, superpowers",
       "version": "1.0.0"
