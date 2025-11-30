@@ -1,0 +1,11 @@
+{
+  "name": "claude-config",
+  "description": "Personal Claude Code config: conventional-commit skill, skill-developer skill, custom statusline, superpowers plugin",
+  "version": "1.0.0",
+  "author": {
+    "name": "Sammy Patenotte"
+  },
+  "repository": "https://github.com/spatenotte/claude-config",
+  "license": "MIT",
+  "keywords": ["skills", "conventional-commits", "statusline", "configuration"]
+}

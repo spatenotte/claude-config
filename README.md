@@ -1,18 +1,36 @@
-# .claude
+# claude-config
 
-Reusable Claude Code configuration intended to be added as a git submodule at `.claude` in other projects.
+Personal Claude Code configuration with skills, custom statusline, and plugins.
 
-## Usage
+## Installation
+
+### As a Plugin (Recommended)
 
 ```bash
-# Add to a project
-git submodule add <repo-url> .claude
+# Add the marketplace
+/plugin marketplace add spatenotte/claude-config
 
-# Clone a project with this submodule
-git clone --recurse-submodules <project-url>
+# Install the plugin
+/plugin install claude-config@spatenotte-marketplace
 
-# Update submodule to latest
-git submodule update --remote .claude
+# Update to latest
+/plugin update claude-config
+```
+
+### Alternative: Symlink
+
+```bash
+# Clone somewhere central
+git clone git@github.com:spatenotte/claude-config.git ~/.claude-config
+
+# Symlink in each project
+ln -s ~/.claude-config .claude
+```
+
+### Alternative: Submodule
+
+```bash
+git submodule add git@github.com:spatenotte/claude-config.git .claude
 ```
 
 ## Contents
@@ -24,16 +42,13 @@ git submodule update --remote .claude
 | `conventional-commit` | Create git commits following Conventional Commits spec |
 | `skill-developer` | Guide for creating and managing Claude Code skills |
 
-### Structure
+### Included Plugins
 
-```
-.claude/
-├── skills/           # Claude Code skills
-├── commands/         # Slash commands
-├── hooks/            # Hook scripts
-├── agents/           # Agent definitions
-└── settings.json     # Claude Code settings
-```
+- [superpowers](https://github.com/obra/superpowers) - Auto-enabled
+
+### Custom Statusline
+
+Displays model, git branch, directory, cost, and duration. Requires `jq`.
 
 ## Creating Skills
 
