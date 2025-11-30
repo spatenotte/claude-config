@@ -4,30 +4,42 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Purpose
 
-This repository stores reusable Claude Code skills for sharing across personal projects.
+This repository is a reusable `.claude` directory intended to be added as a git submodule at the root of other projects. It contains shared skills, commands, hooks, and agents.
+
+## Usage as Submodule
+
+```bash
+# Add to a project
+git submodule add <repo-url> .claude
+
+# Update in a project
+git submodule update --remote .claude
+```
+
+## Directory Structure
+
+```
+.claude/                    # This repo becomes .claude/ in target projects
+├── skills/                 # Claude Code skills
+│   └── {skill-name}/
+│       ├── SKILL.md        # Required: frontmatter + instructions
+│       ├── scripts/        # Optional: executable code
+│       ├── references/     # Optional: detailed documentation
+│       └── assets/         # Optional: templates, boilerplate
+├── commands/               # Slash commands (*.md files)
+├── hooks/                  # Hook scripts
+├── agents/                 # Agent definitions
+└── settings.json           # Claude Code settings (hooks, permissions)
+```
 
 ## Creating New Skills
 
-When creating or updating skills, use the skill-creator pattern from https://github.com/anthropics/skills/tree/main/skill-creator
+Use the skill-creator pattern from https://github.com/anthropics/skills/tree/main/skill-creator
 
-### Skill Structure
+Or use the `skills/skill-developer` skill for hook-based auto-activation.
 
-Each skill is a directory containing:
-- `SKILL.md` (required) - YAML frontmatter (name, description) + Markdown instructions
-- `scripts/` - Executable code for deterministic/repeated tasks
-- `references/` - Documentation loaded as needed (schemas, APIs, workflows)
-- `assets/` - Output resources (templates, boilerplate) not loaded into context
-
-### Key Design Principles
+### Key Principles
 
 1. **Conciseness** - Context window is shared; only include what Claude genuinely needs
-2. **Degrees of Freedom** - Match specificity to task: high freedom for flexible approaches, low for fragile/sequential operations
-3. **Progressive Disclosure** - Metadata (~100 words) always visible; SKILL.md body (<5k words) loaded on trigger; bundled resources loaded as needed
-
-### SKILL.md Guidelines
-
-- Use imperative/infinitive form
-- Put "when to use" details in frontmatter description, not body
-- Write for another Claude instance to understand
-- Keep under 500 lines; split longer content into references
-- Skill name must be hyphen-case, max 40 characters
+2. **Progressive Disclosure** - SKILL.md body <500 lines; use references/ for details
+3. **Skill name** - Hyphen-case, max 40 characters, matches directory name
